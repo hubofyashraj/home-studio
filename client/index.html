@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Studio</title>
+    <script src="http_code.jquery.com_jquery-3.6.0.js"></script>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 1em;
+    }
+
+    nav{
+        width: 100%;
+        height: 4em;
+        background: rgba(206, 173, 40, 0.82);
+        margin: 0;
+        padding: 0;
+        gap: 0;
+        border-radius: 1em;
+        display: flex;
+    }
+
+    nav button{
+        width: calc(100% / 3);
+        height: 100%;
+        background: none;
+        border: none;
+    }
+
+    nav button:first-child{
+        border-radius: 1em 0 0 1em;
+    }
+
+    nav button:last-child{
+        border-radius: 0 1em 1em 0;
+    }
+
+    nav button:hover{
+        background: rgba(159, 215, 17, 0.45);
+    }
+
+    main{
+        position: fixed;
+        margin-top: 1em;
+        border-radius: 1em;
+        width: calc(100% - 2em);
+        min-width: calc(100% - 39em);
+        height: calc(100% - 8em);
+        background: rgba(100, 149, 237, 0.42);
+        display: flex;
+    }
+    .player{
+        position: relative;
+        width: 50%;
+        min-width: 22em;
+        max-width: 35em;
+        margin: 1em;
+        height: calc(100% - 3em);
+        border: 5px #a2c0fc solid;
+        border-radius: 10px;
+        /*display: none;*/
+    }
+
+    .search{
+        padding: 1em;
+        width: 50%;
+        max-width: calc(100% - 22em);
+        min-width: calc(100% - 35em);
+
+    }
+
+    input[type="search"]{
+        margin-left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        border-width: 0 0 1px;
+        border-radius: 1.5em;
+        width: 50%;
+        min-width: 11em;
+        height: 2.5em;
+        text-align: center;
+        outline: none;
+        box-shadow: #76a3ff ;
+    }
+
+    .list{
+        height: calc(100% - 5.5em);
+        max-width: 100%;
+        min-width: 11em;
+        margin-top: 1em;
+        padding: 1em;
+        display: grid;
+        justify-items: end;
+        grid-template-columns: repeat(5, 1fr);
+        overflow-y : scroll;
+        overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar{
+        width: 0.5em;
+        background: rgba(189, 210, 246, 0);
+        border-radius: 1em;
+    }
+
+    ::-webkit-scrollbar-track{
+        background: rgba(189, 210, 246,0);
+    }
+
+    ::-webkit-scrollbar-thumb{
+        background: #fb700c;
+        border-radius: 1em;
+    }
+
+</style>
+<body>
+<nav>
+    <button>Movies</button>
+    <button>Shows</button>
+    <button>Music</button>
+</nav>
+<main >
+
+    <style>
+
+
+        #video-box{
+            width: 100%;
+            height: 56.25%;
+            border-bottom: 5px #a2c0fc solid;
+        }
+
+        #next-list{
+            height: 35%;
+            padding: 0 1em;
+            font-family: "Noto Sans";
+        }
+
+        #next-list h3{
+            color: rgba(0,0,0,0.5);
+            user-select: none;
+        }
+
+        #next-list #list{
+            height: 80%;
+            overflow-y: scroll;
+        }
+
+        #next-list #list .btn{
+            width: 10.3%;
+            max-width: 4.5em;
+            min-width: 3.95em;
+            margin: 2px;
+            height: 1.5em;
+            border: none;
+            border-radius: 3px;
+            background: #76a3ff;
+            padding-top: 2px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        #next-list #list .btn:hover{
+            background: #548cff;
+        }
+
+        #close{
+            width: 1em;
+            height: 2em;
+            background: transparent;
+            border: none;
+            text-align: center;
+            padding: 0;
+            border-radius: 5px;
+            font-size: 2em;
+            color: rgba(0,0,0,0.5);
+        }
+
+        #close:hover{
+            background: #a2c0fc;
+        }
+
+        #video-box:hover .overlay{
+            opacity: 1;
+        }
+
+        .overlay{
+            position: absolute;
+            width: 100%;
+            background: linear-gradient(#a2c0fc, #76a3ffaa);
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .overlay h3, .overlay .episode{
+            font-family: "Noto Sans";
+            color: #0053ff;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+    </style>
+
+    <div class="player">
+        <div id="video-box">
+            <video id="now-playing" width="100%" height="100%" controls>
+                <source id="videosrc" src="vids/onepiece/One%20Piece%200001%20I'm%20Luffy!%20The%20Man%20Who's%20Gonna%20Be%20King%20of%20the%20Pirates!.mp4">
+            </video>
+                <div class="overlay">
+                    <h3 class="title">One Piece</h3>
+                    <h4 class="episode">Episode 1</h4>
+                    <input class="title-id" type="hidden" value="onepiece">
+                    <input class="episode" type="hidden" value="1">
+                </div>
+        </div>
+        <div id="next-list">
+            <div style="display: flex;justify-content: space-between">
+                <h3>Up Next</h3>
+                <button id="close" >&times;</button>
+            </div>
+            <div id="list">
+                <button class="btn next-btns">2</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="search">
+        <input type="search" placeholder="search">
+
+        <style>
+            .content{
+                width: 10em;
+                height: 12em;
+                background: rgba(255, 108, 2, 0.96);
+                margin: 0.5em;
+                border-radius: 0.5em;
+            }
+
+            .content .value{
+                width: 100%;
+                height: 50%;
+                background: brown;
+                border-radius: 0.5em 0.5em 0 0;
+            }
+
+            .value .thumbnail{
+                background: url("images/bg1.jpg");
+                border-radius: 0.5em 0.5em 0 0;
+                opacity: 0.5;
+                width: 100%;
+                height: 100%;
+            }
+
+            .content .details{
+                height: 6em;
+                color: white;
+                display: flow-root;
+            }
+
+            .details h3{
+                margin: 0.5em;
+                height: 2.3em;
+            }
+
+            .onhoverplay:hover{
+                background: rgba(0,0,0,0.6);
+            }
+
+            .onhoverplay{
+                margin: 0 0.5em 0.5em 0.5em;
+                width: 11em;
+                height: 2em;
+                float: right;
+                background: rgba(0, 0, 0, 0.41);
+                border-radius: 0.5em;
+                border: none;
+                color: white;
+            }
+
+        </style>
+
+        <div class="list">
+
+            <div class="content">
+                <input id="name" type="hidden" value="onepiece">
+                <div class="value card">
+                    <div class="thumbnail">
+                    </div>
+
+                </div>
+                <div class="details">
+                    <h3>One Piece</h3>
+                    <button class="onhoverplay">play</button>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</main>
+<footer></footer>
+</body>
+<script src="index.js"></script>
+
+</html>
